@@ -35,13 +35,13 @@
     card:"I inherited a house, or I'm handling an estate",
     blurb:"A property that came to you through a death in the family, whether or not probate has started.",
     also:"Probate, executor or administrator, several heirs, a house full of belongings, a relative's house you have never lived in",
-    headline:"An inherited property usually has more room in it than people expect.",
-    intro:"Estate sales stall on three things: where probate stands, whether every heir agrees, and what happens to everything still inside. Those decide what is possible before price is even a conversation.",
+    headline:"An inherited property needs a review of ownership and timing.",
+    intro:"Tell us about ownership, the estate process and the condition of the property. A qualified attorney or title professional should confirm who can sign and any legal requirements.",
     extra:{name:"heirNotes", label:"Anything about the estate we should know before we call? (optional)"},
     qs:[
       {id:"probate", key:true, q:"Where does the estate stand?", sub:"A rough answer is fine, this is the first thing we check anyway.",
        opts:["Probate is finished","It is in probate now","Probate has not started","No probate needed, it transferred directly","I am not sure"]},
-      {id:"heirs", key:true, q:"Who else has a claim on the property?", sub:"This decides who has to sign at closing.",
+      {id:"heirs", key:true, q:"Who else has a claim on the property?", sub:"This helps identify questions for the title or legal review.",
        opts:["Just me","Me and one other person","Three or more heirs","I am not sure yet"]},
       {id:"agreed", q:"Are the other heirs agreed on selling?", sub:"An honest answer here saves everybody weeks.",
        when:function(a){return a.heirs==="Me and one other person"||a.heirs==="Three or more heirs";},
@@ -56,8 +56,8 @@
     card:"I'm behind on payments or facing foreclosure",
     blurb:"Missed payments, a notice of default, an auction or hearing date, back taxes, or a lien.",
     also:"Pre-foreclosure, notice of default, auction date set, back property taxes, tax lien, HOA lien, code violations, a judgment against the property",
-    headline:"With a date on the calendar, certainty matters more than the last few thousand.",
-    intro:"The worst outcome here is finding out too late that you had more options than you thought. What you have told us is enough for the team to work out what is realistic against your timeline and come back with real numbers.",
+    headline:"Tell us about the deadline you are facing.",
+    intro:"The team can review a possible property sale against your timeline. An enquiry does not stop foreclosure or other legal deadlines. Contact your lender and a qualified professional about those obligations.",
     extra:{name:"deadlineNotes", label:"What date are you working against? (optional)"},
     qs:[
       {id:"pressure", key:true, q:"What is the pressure?",
@@ -115,7 +115,7 @@
     blurb:"A job, a separation, a downsize, or a purchase that depends on this one closing.",
     also:"Relocation, divorce or separation, downsizing, a health or care move, already under contract on the next house, moving in with family",
     headline:"Working backwards from your date, here is what holds.",
-    intro:"When a date matters more than the last few thousand, the real risk is a buyer whose financing collapses in week five. Tell us the date and the team will tell you honestly whether it can be met.",
+    intro:"Tell us your preferred date so the team can assess a possible sale. Timing depends on property review, title, contractual terms and the parties involved.",
     extra:{name:"movingNotes", label:"What date are you working towards? (optional)"},
     qs:[
       {id:"driver", key:true, q:"What is driving the move?",
@@ -157,25 +157,25 @@
   var COMBOS = {
   "deadline|inherited":{
     t:"An inherited property with a foreclosure clock on it",
-    p:"This is the most time-critical combination there is, and it is more common than people think. The estate has to be able to convey title before anything can close, and a foreclosure date does not pause while probate runs. Whoever you talk to needs to be working both clocks at once. Tell us the date on the first call and we will tell you honestly whether it can be met."},
+    p:"Estate administration and foreclosure can involve separate deadlines. Do not assume that an enquiry or an estate proceeding stops a foreclosure. Confirm your position with a qualified attorney and lender, and tell the team about any relevant dates."},
   "condition|deadline":{
     t:"A house that needs work, with a date attached",
     p:"A deadline and repair needs can affect your options. Tell us about both. A particular price or closing date cannot be guaranteed."},
   "condition|inherited":{
     t:"An inherited house that also needs work",
-    p:"Estates rarely have the cash to fund repairs, and heirs almost never want to spend their own money fixing a house they are selling. That is normal. It means the routes that buy it as it stands are usually the ones worth pricing."},
+    p:"Repair needs and estate administration can both affect selling options. Tell the team about the condition and ownership so they can review a possible sale."},
   "deadline|rental":{
     t:"A rental with a payment problem",
-    p:"A tenant in place and arrears on the loan is a combination most buyers walk away from, because it needs both problems solved at once. It is worth telling us the rent and the arrears together on the first call, because the two numbers read very differently side by side than they do apart."},
+    p:"Existing tenancies and loan arrears can both affect a sale. Tell the team about the circumstances. A sale does not automatically remove lease obligations, tenant rights or lender requirements."},
   "condition|rental":{
     t:"A rental that needs work with somebody living in it",
     p:"Access, repair needs and existing tenancies can affect a sale. The team will review the circumstances; tenant rights and lease obligations still apply."},
   "deadline|moving":{
     t:"A move with a payment problem behind it",
-    p:"Two dates that do not care about each other: the one you have to be out by, and the one the lender or the court has set. The route you pick has to satisfy the earlier of the two, and that is usually not a listing."},
+    p:"Tell us about both your moving date and any lender or court deadlines. The team can assess a possible sale, but no closing date or relief from existing obligations is guaranteed."},
   "inherited|moving":{
     t:"An estate property and a move of your own",
-    p:"You are running your own timeline and the estate's at the same time, and probate sets the pace whether you like it or not. Worth being clear on the first call about which of the two is actually driving you."},
+    p:"Your moving plans and estate administration may have different timelines. Tell us about both and confirm estate requirements with a qualified professional."},
   "condition|moving":{
     t:"A house that needs work and a date to be out by",
     p:"Repairs before a listing would eat the time you do not have. The routes that take the house as it stands are the ones that can hold your date."},
