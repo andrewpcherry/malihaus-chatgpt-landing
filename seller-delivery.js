@@ -66,7 +66,7 @@
       return {input:input, value:input.value, checked:input.checked};
     });
     form.querySelectorAll('button').forEach(function(button){button.disabled=true;});
-    var fingerprint = JSON.stringify([lead.contact, lead.situations, answers, lead.notes]);
+    var fingerprint = JSON.stringify([lead.contact, lead.situations, answers, lead.notes, lead.consent.marketing]);
     sending = crypto.subtle.digest('SHA-256', new TextEncoder().encode(fingerprint)).then(function (bytes) {
       var key = 'mh_seller_' + Array.from(new Uint8Array(bytes)).map(function(b){return b.toString(16).padStart(2,'0');}).join('');
       function remember(status) {
@@ -98,7 +98,7 @@
         ['price_expectation_optional','Price Expectation (Optional)',c.priceExpectation],
         ['preferred_callback_time','Preferred Callback Time',c.bestTime],
         ['preferred_contact_method','Preferred Contact Method',c.contactPreference],
-        ['phonetext_contact_permission','Phone/Text Contact Permission',c.phone ? 'Consent given: '+lead.consent.at : 'No phone provided; email only'],
+        ['phonetext_contact_permission','Phone/Text Contact Permission',lead.consent.marketing ? 'Marketing calls/texts consent: '+lead.consent.marketingAt : 'Enquiry follow-up only. No consent to automated marketing calls or marketing text messages.'],
         ['human_followup_requested','Human Follow-Up Requested','Yes'],
         ['reason_for_considering_a_sale','Reason for Considering a Sale',lead.situations.join(', ')],
         ['property_condition','Property Condition',answers.issue],

@@ -54,8 +54,8 @@
 
     /* ---- Legal links ----
        Both verified live on malihaus.com, 2026-09-03. */
-    privacyUrl: new URL('privacy-policy/', document.querySelector('link[rel="canonical"]').href).href,
-    termsUrl: 'https://www.malihaus.com/terms-of-use/',
+    privacyUrl: new URL('./privacy-policy/', location.href).href,
+    termsUrl: new URL('./terms-of-use/', location.href).href,
 
     /* ---- A2P consent ----
        Michael's approved wording, used verbatim. Do not reword it.
@@ -65,7 +65,9 @@
        confirms in writing that it should change. Never swap it
        automatically for the public number. */
     consentCheckboxLabel: 'I agree to the Terms & Conditions and Privacy Policy.',
-    consentDisclosure: 'By submitting this form, you consent to receive marketing/notification messages from MaliHaus, a brand of Real Estate RE Marketing Inc. Message frequency varies, MSG and data rates may apply. Reply HELP for help at (321) 655-2099, reply STOP to unsubscribe. We will not share or sell mobile data to third parties for promotional or marketing purposes.',
+    consentDisclosure: 'I request a response about my property enquiry using the contact details I provide. Marketing permission is optional.',
+    marketingConsentDisclosure: 'I agree to receive marketing calls and text messages, including calls using automated technology or an artificial or prerecorded voice, at the phone number I provide, from MaliHaus, a brand of Real Estate RE Marketing Inc. Consent is not a condition of purchasing any property, goods or services. Message frequency varies. Message and data rates may apply. Reply STOP to unsubscribe or HELP for help at (321) 655-2099. We will not share or sell mobile data to third parties for promotional or marketing purposes.',
+
 
     /* ---- Review proof ----
        Michael's figures, supplied by him. Wording is the approved wording. */
@@ -376,7 +378,12 @@
     wireEvents(document);
     wireDrawer();
     attribution();
-    mountChat();
+    var chatChoice = document.createElement('button');
+    chatChoice.type = 'button';
+    chatChoice.textContent = 'Open chat (HighLevel/LeadConnector)';
+    chatChoice.style.cssText = 'margin:12px;padding:8px 12px';
+    chatChoice.onclick = function(){ mountChat(); chatChoice.remove(); };
+    (document.querySelector('footer') || document.body).appendChild(chatChoice);
     track('page_ready', { page_type: document.body.getAttribute('data-page-type') || 'other' });
   }
 

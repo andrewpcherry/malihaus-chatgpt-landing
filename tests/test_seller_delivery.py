@@ -63,7 +63,7 @@ class SellerDeliveryTests(unittest.TestCase):
   self.assertEqual(data['email'],accepted['contact']['email'])
   self.assertEqual(data['phone'],accepted['contact']['phone'])
   self.assertIn('Consent: '+json.dumps(accepted['consent'],separators=(',',':')),data['conversation_summary'])
-  self.assertEqual(data['phonetext_contact_permission'],'Consent given: '+accepted['consent']['at'])
+  self.assertEqual(data['phonetext_contact_permission'],'Enquiry follow-up only. No consent to automated marketing calls or marketing text messages.')
   self.assertEqual(self.page.locator('.mhf-done').count(),1)
  def test_invalid_email(self):
   self.page.locator('#email').fill('not-an-email');self.submit()

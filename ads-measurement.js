@@ -1,6 +1,7 @@
 (function () {
   'use strict';
   var allowed = false, started = false, sent = {}, banner;
+  var privacySignal = typeof navigator !== 'undefined' && navigator.globalPrivacyControl === true;
   var production = location.hostname === 'getoffer.malihaus.com';
   function measure(name, data, id) {
     try {
@@ -24,6 +25,7 @@
     } catch (_) {}
   }
   function choose(value) {
+    value = value && !privacySignal;
     allowed = value;
     try { localStorage.setItem('mh_ads_consent', value ? 'allow' : 'deny'); } catch (_) {}
     try { if (window.oaiq) window.oaiq('consent', value); } catch (_) {}
@@ -39,13 +41,16 @@
       banner = document.createElement('section'); banner.setAttribute('aria-label', 'Advertising measurement choice');
       banner.style.cssText = 'position:fixed;bottom:16px;left:16px;right:16px;z-index:10000;max-width:580px;padding:20px;border:1px solid #b78c59;background:#171d25;color:#fff;border-radius:12px;box-shadow:0 6px 30px #0008;font:16px/1.5 sans-serif';
       banner.innerHTML = '<p style="margin:0 0 12px">Allow advertising measurement? MaliHaus uses the OpenAI Ads Pixel to measure visits and successful enquiries. Matching may use securely hashed contact information. Your choice does not affect your enquiry. <a href="/privacy-policy/" style="color:#e8c28e">Privacy policy</a></p><button type="button" data-choice="allow">Allow measurement</button> <button type="button" data-choice="deny">Decline</button>';
+      banner.querySelector('[data-choice="allow"]').disabled = privacySignal;
+      if (privacySignal) banner.innerHTML = banner.innerHTML.replace('Allow advertising measurement?', 'Your browser privacy signal disables advertising measurement.');
       banner.querySelector('[data-choice="allow"]').onclick = function () { choose(true); };
       banner.querySelector('[data-choice="deny"]').onclick = function () { choose(false); };
       document.body.appendChild(banner);
     }
   };
   var choice; try { choice = localStorage.getItem('mh_ads_consent'); } catch (_) {}
-  if (choice === 'allow') { allowed = true; start(); }
+  if (privacySignal) { choose(false); }
+  else if (choice === 'allow') { allowed = true; start(); }
   else if (choice !== 'deny') window.MHAds.preferences();
   var preferences = document.createElement('button'); preferences.type = 'button';
   preferences.textContent = 'Advertising privacy choices'; preferences.onclick = window.MHAds.preferences;

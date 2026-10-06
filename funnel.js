@@ -77,7 +77,7 @@
     blurb:"Repairs, damage, or years of deferred maintenance that make listing it feel impossible.",
     also:"Roof, foundation, plumbing or electrical, fire or water damage, mold, a hoarder property, a half-finished renovation, condemned or red-tagged",
     headline:"Condition is what decides who can actually buy it.",
-    intro:"A house a bank will not lend on cannot be sold the ordinary way, which sounds like bad news and often is not. It takes a retail listing off the table, and that is exactly the situation we buy in.",
+    intro:"Repairs can affect financing and selling options. Tell us about the condition so the team can review the property. Any offer depends on that review and a written agreement.",
     extra:{name:"conditionNotes", label:"Briefly, what is wrong with it? (optional)"},
     qs:[
       {id:"issue", key:true, q:"What is the main problem?", sub:"Pick the biggest one.",
@@ -96,7 +96,7 @@
     blurb:"Tenants, turnover, repairs stacking up, or a property you manage from too far away.",
     also:"Non-paying tenant, mid-eviction, squatters, a vacant rental, Section 8, a small portfolio, an out-of-state property you never see",
     headline:"A rental is a different proposition to an owner-occupied house.",
-    intro:"You do not have to empty it first. A tenant in place and a property that still produces rent can make it worth more to the right buyer, not less.",
+    intro:"The team can review occupied rental properties. Any sale remains subject to lease terms, tenant rights, applicable law and a written agreement.",
     extra:{name:"rentalNotes", label:"Addresses or unit count if it is more than one property (optional)"},
     qs:[
       {id:"tenants", key:true, q:"What is the tenant situation?",
@@ -142,7 +142,7 @@
     blurb:"Nothing urgent and nothing wrong. You want the real numbers before you decide anything.",
     also:"Curious what it would fetch, comparing an offer you already have, thinking about it for next year",
     headline:"Here is what your answers tell us about the property.",
-    intro:"Nothing here is urgent, so take it at your own pace. The team will put real numbers together against what you have told us, and the guide has the arithmetic behind how the costs work.",
+    intro:"Nothing here is urgent, so take it at your own pace. The team will put real numbers together against what you have told us, and discuss the available options.",
     extra:null,
     qs:[
       {id:"question", key:true, q:"What are you actually trying to work out?",
@@ -160,7 +160,7 @@
     p:"This is the most time-critical combination there is, and it is more common than people think. The estate has to be able to convey title before anything can close, and a foreclosure date does not pause while probate runs. Whoever you talk to needs to be working both clocks at once. Tell us the date on the first call and we will tell you honestly whether it can be met."},
   "condition|deadline":{
     t:"A house that needs work, with a date attached",
-    p:"These two rule each other's solutions out. There is no time to do the repairs, and no ordinary buyer's lender will lend until they are done. That takes a listing off the table almost entirely and leaves the routes below as the real comparison."},
+    p:"A deadline and repair needs can affect your options. Tell us about both. A particular price or closing date cannot be guaranteed."},
   "condition|inherited":{
     t:"An inherited house that also needs work",
     p:"Estates rarely have the cash to fund repairs, and heirs almost never want to spend their own money fixing a house they are selling. That is normal. It means the routes that buy it as it stands are usually the ones worth pricing."},
@@ -169,7 +169,7 @@
     p:"A tenant in place and arrears on the loan is a combination most buyers walk away from, because it needs both problems solved at once. It is worth telling us the rent and the arrears together on the first call, because the two numbers read very differently side by side than they do apart."},
   "condition|rental":{
     t:"A rental that needs work with somebody living in it",
-    p:"You cannot easily repair a property you cannot get into, and a lender will not fund a buyer for it in that condition. Selling it exactly as it stands, tenant included, is usually the shortest line between here and done."},
+    p:"Access, repair needs and existing tenancies can affect a sale. The team will review the circumstances; tenant rights and lease obligations still apply."},
   "deadline|moving":{
     t:"A move with a payment problem behind it",
     p:"Two dates that do not care about each other: the one you have to be out by, and the one the lender or the court has set. The route you pick has to satisfy the earlier of the two, and that is usually not a listing."},
@@ -212,7 +212,7 @@
    when:function(a){return a.equity && a.equity!=="It is paid off, no mortgage";},
    opts:["Under 4 percent","Between 4 and 6 percent","Over 6 percent","I would have to look it up"]},
   {id:"cashneed", q:"Do you need all of the money at closing?",
-   sub:"This is the other half of it. Being open to payments over time often means a much higher total.",
+   sub:"This is the other half of it. Any payment arrangement needs its own written terms and appropriate professional review.",
    opts:["Yes, all of it at closing","Some now, the rest over time would be fine","Monthly payments would actually suit me better","I would need to understand it first"]},
   {id:"timeline", q:"How soon do you want this resolved?",
    when:function(a,prim,has){return !(has("deadline") && a.dateset && a.dateset.indexOf("Yes")===0);},
@@ -372,8 +372,8 @@
     var h = '<div class="mhf-step">'
       + '<p class="kicker">Step one</p>'
       + '<h1 class="mhf-h">What is going on with the property?</h1>'
-      + '<p class="mhf-sub">Pick everything that applies. Most people are in more than one of these at '
-      + 'once, and the combination usually matters more than any single one.</p>'
+      + '<p class="mhf-sub">Pick everything that applies. Your answers help us understand '
+      + 'your enquiry.</p>'
       + (S.situations.length
           ? '<p class="mhf-preset">We have ticked ' + esc(BRANCHES[S.situations[0]].label.toLowerCase())
             + ' from the page you came from. Add anything else that is true, or untick it.</p>'
@@ -488,7 +488,7 @@
       + f('ZIP code','zip','text','postal-code','inputmode="numeric" maxlength="10" oninput="MHF.zip(this.value)"')
       + '<div class="mhf-f mhf-full mhf-ziphint" id="mhf-zipstate"></div>'
       + pick('Best time to call','bestTime',['Any time','Morning','Afternoon','Evening'],'Any time')
-      + pick('Call or text first','contactPref',['A call is fine','Text me first','Either is fine'],'A call is fine')
+      + pick('Call or text first','contactPref',['A call is fine','Text me first','Email me','Either is fine'],'A call is fine')
       + '<div class="mhf-f mhf-full"><label for="mhfNotes">'
       + esc((BRANCHES[S.primary].extra && BRANCHES[S.primary].extra.label)
             || 'Anything else we should know? (optional)')
@@ -496,8 +496,9 @@
       + '</div>'
       + '<label class="mhf-consent"><input type="checkbox" id="consent">'
       + '<span>' + consentHtml() + '</span></label>'
+      + '<label class="mhf-consent"><input type="checkbox" id="marketingConsent"><span>Optional marketing permission. <span class="mhf-disc">' + esc(CFG.marketingConsentDisclosure || '') + '</span></span></label>'
       + '<div id="mhf-err" class="mhf-err" role="alert"></div>'
-      + '<div class="mhf-nav"><button type="button" id="mhf-send" class="btn solid" onclick="MHF.submit()">Send This And Call Me Back</button>'
+      + '<div class="mhf-nav"><button type="button" id="mhf-send" class="btn solid" onclick="MHF.submit()">Send My Property Enquiry</button>'
       + '<span class="mhf-hint">No obligation. Not a listing agreement.</span></div>'
       + backBar('') + '</form>';
   }
@@ -612,6 +613,7 @@
           addr=val('address'), city=val('city'), zip=val('zip');
       var state = DERIVED_STATE || stateFromZip(zip);
       var consent = document.getElementById('consent');
+      var marketing = document.getElementById('marketingConsent');
       var need = [];
       if (!first) need.push('your first name');
       if (!last) need.push('your last name');
@@ -621,7 +623,8 @@
       if (!addr) need.push('the property address');
       if (!city) need.push('the city');
       if (!/^\d{5}(-\d{4})?$/.test(zip)) need.push('a valid ZIP code');
-      if (consent && !consent.checked) need.push('the tick box so we are allowed to contact you');
+      if (!consent || !consent.checked) need.push('the tick box so we are allowed to contact you');
+      if (marketing && marketing.checked && !phone) need.push('a phone number for optional marketing permission');
       if (need.length) { err.textContent = 'We still need ' + need.join(', ') + '.'; return; }
       err.textContent = '';
 
@@ -640,17 +643,17 @@
                    phone:phone, email:email, address:addr, city:city, state:state, zip:zip,
                    propertyType: S.answers.propertyType || '',
                    priceExpectation: S.answers.priceExpectation || '',
-                   bestTime: val('bestTime'), contactPreference: val('contactPref') },
+                   bestTime: val('bestTime'), contactPreference: phone ? val('contactPref') : 'Email me' },
         notes: val('mhfNotes'),
-        consent: { given:true, at:now, page:location.href },
+        consent: { given:true, at:now, page:location.origin + location.pathname, policyVersion:'2026-10-06', text:CFG.consentCheckboxLabel + ' ' + CFG.consentDisclosure, marketing:!!(marketing && marketing.checked), marketingAt:(marketing && marketing.checked) ? now : null, marketingText:CFG.marketingConsentDisclosure },
         submittedAt: now,
         attribution: attribution()
       };
       lead.summary = leadSummary(t, lead);
 
       if (window.mhTrack) window.mhTrack('property_enquiry_submit',
-        { form_name:'funnel', situation:S.primary, market:'', lead:lead });
-      try { sessionStorage.setItem('mh_last_lead', JSON.stringify(lead)); } catch(e){}
+        { form_name:'funnel' });
+      try { sessionStorage.removeItem('mh_last_lead'); } catch(e){}
       window.mhLastLead = lead;
 
       if (!window.MHSellerDelivery) {
