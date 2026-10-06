@@ -658,6 +658,7 @@
         return;
       }
       window.MHSellerDelivery.send(lead, S.answers).then(function(){
+        try { if (window.MHAds) window.MHAds.leadCreated(lead.submittedAt); } catch(e){}
         S.phase='done'; render();
       }).catch(function(error){
         err.textContent = error.message + ' Please call ' + (CFG.phoneDisplay || '') + ' if you need help.';
