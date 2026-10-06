@@ -54,7 +54,7 @@
 
     /* ---- Legal links ----
        Both verified live on malihaus.com, 2026-09-03. */
-    privacyUrl: 'https://www.malihaus.com/privacy-policy/',
+    privacyUrl: new URL('privacy-policy/', document.querySelector('link[rel="canonical"]').href).href,
     termsUrl: 'https://www.malihaus.com/terms-of-use/',
 
     /* ---- A2P consent ----
@@ -65,7 +65,7 @@
        confirms in writing that it should change. Never swap it
        automatically for the public number. */
     consentCheckboxLabel: 'I agree to the Terms & Conditions and Privacy Policy.',
-    consentDisclosure: 'By submitting this form, you consent to receive marketing/notification messages from MaliHaus Capital. Message frequency varies, MSG and data rates may apply. Reply HELP for help at (321) 655-2099, reply STOP to unsubscribe. We will not share or sell mobile data to third parties for promotional or marketing purposes.',
+    consentDisclosure: 'By submitting this form, you consent to receive marketing/notification messages from MaliHaus, a brand of Real Estate RE Marketing Inc. Message frequency varies, MSG and data rates may apply. Reply HELP for help at (321) 655-2099, reply STOP to unsubscribe. We will not share or sell mobile data to third parties for promotional or marketing purposes.',
 
     /* ---- Review proof ----
        Michael's figures, supplied by him. Wording is the approved wording. */
