@@ -30,7 +30,7 @@
        standalone at /malihaus-funnel/ is superseded. Path is resolved
        against the site root at runtime, so it works from any depth. */
     funnelPath: './',
-    funnelHash: '#quiz',
+    funnelHash: '#start',
 
     /* ---- Lead destination ----
        GoHighLevel captures the website visitor and hands the completed lead
@@ -46,7 +46,7 @@
        While it is empty the concept receptionist on the home page runs
        instead. When it is set, the GHL widget loads on every page and the
        concept widget stands down so the two never overlap. */
-    ghlWidgetSrc: 'https://widgets.leadconnectorhq.com/loader.js',
+    ghlWidgetSrc: '',
     ghlWidgetAttrs: {
       'data-resources-url': 'https://widgets.leadconnectorhq.com/chat-widget/loader.js',
       'data-widget-id': '6a9995f77e179c4b66653b9f'
@@ -378,12 +378,14 @@
     wireEvents(document);
     wireDrawer();
     attribution();
+    if (CONFIG.ghlWidgetSrc) {
     var chatChoice = document.createElement('button');
     chatChoice.type = 'button';
     chatChoice.textContent = 'Open chat (HighLevel/LeadConnector)';
     chatChoice.style.cssText = 'margin:12px;padding:8px 12px';
     chatChoice.onclick = function(){ mountChat(); chatChoice.remove(); };
     (document.querySelector('footer') || document.body).appendChild(chatChoice);
+    }
     track('page_ready', { page_type: document.body.getAttribute('data-page-type') || 'other' });
   }
 

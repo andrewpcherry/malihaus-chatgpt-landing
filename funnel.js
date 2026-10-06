@@ -29,195 +29,18 @@
    * ------------------------------------------------------------------ */
 
   var BRANCHES = {
-  inherited:{
-    icon:"key",
-    label:"Inherited or estate", tag:"Estate",
-    card:"I inherited a house, or I'm handling an estate",
-    blurb:"A property that came to you through a death in the family, whether or not probate has started.",
-    also:"Probate, executor or administrator, several heirs, a house full of belongings, a relative's house you have never lived in",
-    headline:"An inherited property needs a review of ownership and timing.",
-    intro:"Tell us about ownership, the estate process and the condition of the property. A qualified attorney or title professional should confirm who can sign and any legal requirements.",
-    extra:{name:"heirNotes", label:"Anything about the estate we should know before we call? (optional)"},
-    qs:[
-      {id:"probate", key:true, q:"Where does the estate stand?", sub:"A rough answer is fine, this is the first thing we check anyway.",
-       opts:["Probate is finished","It is in probate now","Probate has not started","No probate needed, it transferred directly","I am not sure"]},
-      {id:"heirs", key:true, q:"Who else has a claim on the property?", sub:"This helps identify questions for the title or legal review.",
-       opts:["Just me","Me and one other person","Three or more heirs","I am not sure yet"]},
-      {id:"agreed", q:"Are the other heirs agreed on selling?", sub:"An honest answer here saves everybody weeks.",
-       when:function(a){return a.heirs==="Me and one other person"||a.heirs==="Three or more heirs";},
-       opts:["Yes, everyone agrees","Mostly, we are close","No, we are not agreed","We have not discussed it"]},
-      {id:"contents", q:"What is still inside the house?",
-       opts:["It is cleared out","Some furniture and belongings","Completely full","I have not been inside","Something else"]}
-    ]
-  },
-  deadline:{
-    icon:"doc",
-    label:"Foreclosure or a deadline", tag:"Time pressure",
-    card:"I'm behind on payments or facing foreclosure",
-    blurb:"Missed payments, a notice of default, an auction or hearing date, back taxes, or a lien.",
-    also:"Pre-foreclosure, notice of default, auction date set, back property taxes, tax lien, HOA lien, code violations, a judgment against the property",
-    headline:"Tell us about the deadline you are facing.",
-    intro:"The team can review a possible property sale against your timeline. An enquiry does not stop foreclosure or other legal deadlines. Contact your lender and a qualified professional about those obligations.",
-    extra:{name:"deadlineNotes", label:"What date are you working against? (optional)"},
-    qs:[
-      {id:"pressure", key:true, q:"What is the pressure?",
-       opts:["Behind on mortgage payments","A notice of default or foreclosure filing","Property taxes or a tax lien","A lien, code violation or city notice","A court or auction date is set","Payments are current, the deadline is personal",
-             "Another reason not listed"]},
-      {id:"dateset", key:true, q:"Has a date actually been set?", sub:"This is the single most useful thing you can tell us.",
-       when:function(a){return a.pressure && a.pressure!=="Payments are current, the deadline is personal";},
-       opts:["Yes, within 30 days","Yes, more than 30 days out","No date yet","I do not know"]},
-      {id:"lender", q:"Have you spoken to the lender or the county?",
-       opts:["Yes, we are working on something","I have tried, no progress","Not yet","I would rather they were not involved yet"]}
-    ]
-  },
-  condition:{
-    icon:"tools",
-    label:"Needs work", tag:"Condition",
-    card:"The house needs more work than I want to take on",
-    blurb:"Repairs, damage, or years of deferred maintenance that make listing it feel impossible.",
-    also:"Roof, foundation, plumbing or electrical, fire or water damage, mold, a hoarder property, a half-finished renovation, condemned or red-tagged",
-    headline:"Condition is what decides who can actually buy it.",
-    intro:"Repairs can affect financing and selling options. Tell us about the condition so the team can review the property. Any offer depends on that review and a written agreement.",
-    extra:{name:"conditionNotes", label:"Briefly, what is wrong with it? (optional)"},
-    qs:[
-      {id:"issue", key:true, q:"What is the main problem?", sub:"Pick the biggest one.",
-       opts:["The roof","Foundation or structural","Plumbing, electrical or HVAC","Fire, water or mold damage","Years of clutter or a hoarder situation","Dated throughout, nothing broken","Several of these","Something else not listed"]},
-      {id:"quoted", q:"Have you had the work priced?",
-       opts:["Yes, I have real numbers","I have a rough idea","No quotes yet","I would rather not guess"]},
-      {id:"repairIntent", q:"How would you rather handle the work?", sub:"There is no wrong answer. It changes what we bring you.",
-       opts:["Sell it as it stands, I am not doing the work","I would do some of it, not all",
-             "I would consider doing it if selling as-is costs too much","Something else"]}
-    ]
-  },
-  rental:{
-    icon:"keys",
-    label:"Rental property", tag:"Landlord",
-    card:"I own a rental I'm done with",
-    blurb:"Tenants, turnover, repairs stacking up, or a property you manage from too far away.",
-    also:"Non-paying tenant, mid-eviction, squatters, a vacant rental, Section 8, a small portfolio, an out-of-state property you never see",
-    headline:"A rental is a different proposition to an owner-occupied house.",
-    intro:"The team can review occupied rental properties. Any sale remains subject to lease terms, tenant rights, applicable law and a written agreement.",
-    extra:{name:"rentalNotes", label:"Addresses or unit count if it is more than one property (optional)"},
-    qs:[
-      {id:"tenants", key:true, q:"What is the tenant situation?",
-       opts:["Occupied and paying","Occupied and behind on rent","Occupied, the lease is ending soon","It is vacant right now","We are mid-eviction","Someone is in it without a lease","Something else"]},
-      {id:"units", q:"How much are we talking about?",
-       opts:["One property","Two to four units","Five or more units","Several addresses","Something else"]},
-      {id:"trigger", q:"What tipped you into selling?",
-       opts:["Tired of managing it","It stopped cash flowing","Repairs keep stacking up","Rebalancing or cashing out","I am out of state and it is a hassle",
-             "Another reason not listed"]}
-    ]
-  },
-  moving:{
-    icon:"van",
-    label:"Moving by a date", tag:"Timeline",
-    card:"I need to be out by a certain date",
-    blurb:"A job, a separation, a downsize, or a purchase that depends on this one closing.",
-    also:"Relocation, divorce or separation, downsizing, a health or care move, already under contract on the next house, moving in with family",
-    headline:"Working backwards from your date, here is what holds.",
-    intro:"Tell us your preferred date so the team can assess a possible sale. Timing depends on property review, title, contractual terms and the parties involved.",
-    extra:{name:"movingNotes", label:"What date are you working towards? (optional)"},
-    qs:[
-      {id:"driver", key:true, q:"What is driving the move?",
-       opts:["A job or relocation","Downsizing or upsizing","Divorce or separation",
-             "Health, age or family care","I am buying another place first",
-             "Money is tight and the payments are the problem",
-             "I am behind on payments or facing foreclosure",
-             "Another reason not listed"]},
-      {id:"bothagree", key:true, q:"Are both parties agreed on selling?",
-       when:function(a){return a.driver==="Divorce or separation";},
-       opts:["Yes, we both want to sell","Mostly, we are close","Not yet","The attorneys are handling it"]},
-      {id:"priority", q:"Which matters more to you?",
-       opts:["A closing date I can count on","The highest possible number","A balance of the two",
-            "I am not sure yet"]},
-      {id:"possession", q:"Do you need time in the house after closing?",
-       opts:["Yes, a few weeks","Yes, a month or more","No, I can be out at closing","Not sure yet"]}
-    ]
-  },
-  comparing:{
-    icon:"sign",
-    label:"Weighing it up", tag:"Comparing",
-    exclusive:true,
-    card:"None of these, I'm just working out what it's worth",
-    blurb:"Nothing urgent and nothing wrong. You want the real numbers before you decide anything.",
-    also:"Curious what it would fetch, comparing an offer you already have, thinking about it for next year",
-    headline:"Here is what your answers tell us about the property.",
-    intro:"Nothing here is urgent, so take it at your own pace. The team will put real numbers together against what you have told us, and discuss the available options.",
-    extra:null,
-    qs:[
-      {id:"question", key:true, q:"What are you actually trying to work out?",
-       opts:["What the house is genuinely worth","What I would net listing against selling as-is","Whether a direct offer is a fair number","Whether now is the right time to sell",
-             "Something else not listed"]},
-      {id:"stage", key:true, q:"How far along are you?",
-       opts:["Ready to move if the numbers work","Deciding over the next few months","A year or so out","Just curious"]}
-    ]
-  }
-};
-
-  var COMBOS = {
-  "deadline|inherited":{
-    t:"An inherited property with a foreclosure clock on it",
-    p:"Estate administration and foreclosure can involve separate deadlines. Do not assume that an enquiry or an estate proceeding stops a foreclosure. Confirm your position with a qualified attorney and lender, and tell the team about any relevant dates."},
-  "condition|deadline":{
-    t:"A house that needs work, with a date attached",
-    p:"A deadline and repair needs can affect your options. Tell us about both. A particular price or closing date cannot be guaranteed."},
-  "condition|inherited":{
-    t:"An inherited house that also needs work",
-    p:"Repair needs and estate administration can both affect selling options. Tell the team about the condition and ownership so they can review a possible sale."},
-  "deadline|rental":{
-    t:"A rental with a payment problem",
-    p:"Existing tenancies and loan arrears can both affect a sale. Tell the team about the circumstances. A sale does not automatically remove lease obligations, tenant rights or lender requirements."},
-  "condition|rental":{
-    t:"A rental that needs work with somebody living in it",
-    p:"Access, repair needs and existing tenancies can affect a sale. The team will review the circumstances; tenant rights and lease obligations still apply."},
-  "deadline|moving":{
-    t:"A move with a payment problem behind it",
-    p:"Tell us about both your moving date and any lender or court deadlines. The team can assess a possible sale, but no closing date or relief from existing obligations is guaranteed."},
-  "inherited|moving":{
-    t:"An estate property and a move of your own",
-    p:"Your moving plans and estate administration may have different timelines. Tell us about both and confirm estate requirements with a qualified professional."},
-  "condition|moving":{
-    t:"A house that needs work and a date to be out by",
-    p:"Repairs before a listing would eat the time you do not have. The routes that take the house as it stands are the ones that can hold your date."},
-  "moving|rental":{
-    t:"A rental to unwind while you are moving yourself",
-    p:"You are handling a tenant, a lease, and your own move at once. The good news is that the rental does not have to be empty for it to sell, so it does not have to be one more thing on your list."},
-  "inherited|rental":{
-    t:"An inherited property with tenants in it",
-    p:"The lease came with the house and it survives the inheritance. That is not a problem to solve before selling, it is a fact to price in, and in some structures the rent is what makes the numbers work."}
-};
-
+    comparing:{icon:'sign',label:'Property enquiry',tag:'Property',card:'I am considering selling a property',blurb:'Share the property details and your preferred selling timeframe.',exclusive:true,headline:'Tell us how to contact you about the property.',intro:'The MaliHaus team can review your enquiry. Any offer depends on property review and a separate written agreement.',extra:null,qs:[]},
+    condition:{icon:'tools',label:'Property condition',tag:'Condition',card:'The property needs repairs',blurb:'Tell us about its current condition.',headline:'Tell us how to contact you about the property.',intro:'The MaliHaus team can review the condition you describe. No price or closing date is guaranteed.',extra:null,qs:[{id:'issue',q:'How would you describe the property condition?',opts:['Needs minor repairs','Needs major repairs','Renovation in progress','I am not sure']}]},
+    rental:{icon:'keys',label:'Rental property',tag:'Property',card:'I am considering selling a rental property',blurb:'Share the property and occupancy details.',headline:'Tell us how to contact you about the property.',intro:'The MaliHaus team can review your property enquiry. Any sale requires a separate written agreement.',extra:null,qs:[]}
+  };
+  var COMBOS = {};
   var COMMON = [
-  {id:"location", q:"Where is the property?", sub:"We buy across "+MARKET+". The exact address comes later.",
-   opts:["Florida","Ohio","North Carolina","Tennessee","Alabama","Indiana","Kansas City area","Another state"]},
-  {id:"propertyType", q:"What kind of property is it?",
-   opts:["Single family home","Townhouse","Condominium","Duplex or multi family","Mobile or manufactured home","Vacant land","Something else"]},
-  {id:"priceExpectation", q:"Roughly what do you think it is worth?",
-   sub:"A rough band is fine. It just tells us whether we are in the same ballpark before we call.",
-   opts:["Under $150,000","$150,000 to $250,000","$250,000 to $400,000","$400,000 to $600,000","Over $600,000","I would rather not say"]},
-  {id:"title", q:"Are you the owner on the title?", sub:"We can only work with somebody who is able to sign.",
-   opts:["Yes, I am the owner","Yes, one of several owners","I am the executor, or I hold power of attorney","No, I am family helping out","No, I rent here","It is complicated, the title needs sorting out"]},
-  {id:"listed", q:"Is it listed with an agent right now?",
-   when:function(a,prim){return prim!=="comparing";},
-   opts:["No","It was listed, that agreement has ended","Yes, it is listed now","It is under contract",
-            "Something else"]},
-  {id:"occupancy", q:"Who is in the property right now?",
-   when:function(a,prim,has){return !has("rental");},
-   opts:["I live there","A tenant","It is vacant","Family, or somebody else","Something else"]},
-  {id:"equity", q:"What is left on the mortgage compared to what the house is worth?",
-   sub:"This is the single number that changes the answer most. A rough guess is genuinely fine.",
-   opts:["It is paid off, no mortgage","I owe less than half of what it is worth","I owe about half","I owe close to what it is worth","I owe more than it is worth","I am not sure"]},
-  {id:"rate", q:"Roughly what interest rate is that loan at?",
-   sub:"Worth checking before we speak, because it changes what is realistic.",
-   when:function(a){return a.equity && a.equity!=="It is paid off, no mortgage";},
-   opts:["Under 4 percent","Between 4 and 6 percent","Over 6 percent","I would have to look it up"]},
-  {id:"cashneed", q:"Do you need all of the money at closing?",
-   sub:"This is the other half of it. Any payment arrangement needs its own written terms and appropriate professional review.",
-   opts:["Yes, all of it at closing","Some now, the rest over time would be fine","Monthly payments would actually suit me better","I would need to understand it first"]},
-  {id:"timeline", q:"How soon do you want this resolved?",
-   when:function(a,prim,has){return !(has("deadline") && a.dateset && a.dateset.indexOf("Yes")===0);},
-   opts:["As soon as possible","Within 30 days","Thirty to ninety days","More than 90 days","It depends on the numbers"]}
-];
+    {id:'location',q:'Where is the property?',opts:['Florida','Ohio','North Carolina','Tennessee','Alabama','Indiana','Kansas City area','Another state']},
+    {id:'propertyType',q:'What kind of property is it?',opts:['Single family home','Townhouse','Condominium','Duplex or multi family','Mobile or manufactured home','Vacant land','Something else']},
+    {id:'title',q:'What is your relationship to the property?',opts:['Yes, I am the owner','Yes, one of several owners','I am an authorized representative','No, I am family helping out','No, I rent here']},
+    {id:'occupancy',q:'Who occupies the property?',opts:['Owner occupied','Tenant occupied','Vacant','Other','I would rather not say']},
+    {id:'timeline',q:'What is your preferred selling timeframe?',opts:['Within 30 days','Thirty to ninety days','More than 90 days','I am exploring options']}
+  ];
 
   /* ------------------------------------------------------------------ *
    * STATE
@@ -264,26 +87,11 @@
 }
 
   function tier(){
-  var a=S.answers;
-  if(routeOut(a)) return {t:"X",why:"routed out"};
-  var soon=a.timeline==="As soon as possible"||a.timeline==="Within 30 days";
-  var mid=a.timeline==="Thirty to ninety days"||a.timeline==="It depends on the numbers";
-  var canSign=a.title==="Yes, I am the owner"||a.title==="I am the executor, or I hold power of attorney";
-  var partial=a.title==="Yes, one of several owners"||a.title==="No, I am family helping out";
-  if(has("deadline")&&a.dateset==="Yes, within 30 days") return {t:"A",why:"date inside 30 days"};
-  if(S.situations.length>2) return {t:"A",why:"three or more situations stacked, high motivation"};
-  if(has("comparing")) return (a.stage==="Ready to move if the numbers work"&&canSign&&soon)
-    ? {t:"B",why:"researching but ready"} : {t:"C",why:"research stage"};
-  if(has("condition")&&a.repairIntent==="I would consider doing it if selling as-is costs too much"
-     &&S.situations.length===1) return {t:"C",why:"weighing repairs against selling"};
-  if(has("inherited")&&(a.agreed==="No, we are not agreed"||a.agreed==="We have not discussed it")) return {t:"B",why:"heirs not aligned"};
-  if(has("moving")&&a.bothagree==="Not yet") return {t:"B",why:"both parties not agreed"};
-  if(canSign&&soon) return {t:"A",why:"can sign, inside 30 days"};
-  if(canSign&&mid) return {t:"B",why:"can sign, 30 to 90 days"};
-  if(partial&&(soon||mid)) return {t:"B",why:"second signature needed"};
-  if(a.timeline==="More than 90 days") return {t:"C",why:"more than 90 days out"};
-  return {t:"B",why:"no urgency signal"};
-}
+    var a=S.answers;
+    if(routeOut(a)) return {t:'X',why:'not the property owner or representative'};
+    if(a.title==='Yes, I am the owner' && a.timeline==='Within 30 days') return {t:'A',why:'owner, preferred timeframe within 30 days'};
+    return {t:'B',why:'property enquiry for review'};
+  }
 
   /* US ZIP prefixes map to states deterministically, so the seller never
      picks a state from a list of fifty. It is shown back to them and can be
@@ -324,7 +132,6 @@
   if(a.timeline)  facts.push("timeline "+a.timeline.toLowerCase());
   if(a.title)     facts.push("ownership: "+a.title.toLowerCase());
   if(a.occupancy) facts.push("occupancy: "+a.occupancy.toLowerCase());
-  if(a.equity)    facts.push("mortgage: "+a.equity.toLowerCase());
   if(a.issue)     facts.push("condition: "+a.issue.toLowerCase());
   if(a.propertyType) facts.push("property type: "+a.propertyType.toLowerCase());
   if(a.listed)    facts.push("listing status: "+a.listed.toLowerCase());
@@ -371,7 +178,7 @@
   function pickHtml(){
     var h = '<div class="mhf-step">'
       + '<p class="kicker">Step one</p>'
-      + '<h1 class="mhf-h">What is going on with the property?</h1>'
+      + '<h1 class="mhf-h">Tell us about your property</h1>'
       + '<p class="mhf-sub">Pick everything that applies. Your answers help us understand '
       + 'your enquiry.</p>'
       + (S.situations.length
@@ -438,7 +245,7 @@
       return '<div class="mhf-step"><p class="kicker">Before we go further</p>'
         + '<h2 class="mhf-h">' + esc(ROUTES[out].title) + '</h2>'
         + '<p class="mhf-sub">' + esc(ROUTES[out].copy) + '</p>'
-        + '<div class="mhf-nav"><a class="btn solid" href="https://www.malihaus.com/">Back to the site</a>'
+        + '<div class="mhf-nav"><a class="btn solid" href="./">Back to the site</a>'
         + '<button class="btn ghost" onclick="MHF.restart()">Start again</button></div></div>';
     }
     var h = '<div class="mhf-step"><p class="kicker">Based on what you told us</p>'
@@ -453,7 +260,7 @@
       h += '<div class="mhf-combo"><h3>' + esc(c.t) + '</h3><p>' + esc(c.p) + '</p></div>';
     });
     h += '<div class="mhf-nav"><button class="btn solid" onclick="MHF.toContact()">'
-       + 'Get My Numbers</button><span class="mhf-hint">One short step left</span></div>'
+       + 'Continue to Contact Details</button><span class="mhf-hint">One short step left</span></div>'
        + backBar('') + '</div>';
     return h;
   }
@@ -475,9 +282,8 @@
       return h + '</div><input type="hidden" id="' + name + '" value="' + esc(def) + '"></div>';
     }
     return '<form id="malihaus-seller-enquiry" class="mhf-step" onsubmit="event.preventDefault()"><p class="kicker">Last step</p>'
-      + '<h2 class="mhf-h">Where should we send the numbers?</h2>'
-      + '<p class="mhf-sub">A real person goes through the property with you and what it would actually '
-      + 'pay you. Nothing here commits you to selling.</p>'
+      + '<h2 class="mhf-h">How should we contact you?</h2>'
+      + '<p class="mhf-sub">Share your contact details so the team can respond to your property enquiry. Submitting does not commit you to selling.</p>'
       + '<div class="mhf-form">'
       + f('First name','firstName','text','given-name')
       + f('Last name','lastName','text','family-name')
@@ -503,7 +309,7 @@
       + backBar('') + '</form>';
   }
 
-  /* Michael's approved A2P wording, verbatim, same as everywhere else. */
+  /* Separate enquiry acknowledgement and optional marketing consent. */
   function consentHtml(){
     var t = esc(CFG.consentCheckboxLabel || 'I agree to the Terms & Conditions and Privacy Policy.');
     if (CFG.termsUrl) t = t.replace('Terms &amp; Conditions',
@@ -519,8 +325,8 @@
       + '<p class="mhf-sub">Someone from the MaliHaus team will review the property and the situation '
       + 'you described and come back to you the way you asked.</p>'
       + '<a class="mhf-tel" data-call data-loc="funnel_done" href="#"><span data-phone></span></a>'
-      + '<div class="mhf-nav"><a class="btn ghost" href="https://www.malihaus.com/situations/">Situations we help with</a>'
-      + '<a class="btn ghost" href="https://www.malihaus.com/locations/">Areas we serve</a></div></div>';
+      + '<div class="mhf-nav"><a class="btn ghost" href="./situations/">Situations we help with</a>'
+      + '<a class="btn ghost" href="./">Back to MaliHaus</a></div></div>';
   }
 
   function render(){
