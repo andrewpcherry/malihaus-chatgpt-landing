@@ -152,3 +152,6 @@ footer{border-top:1px solid var(--line);padding:44px 0;font-size:14.5px;color:va
 
 /* Brand ownership, visible throughout the seller enquiry. */
 .mh-brand-disclosure { color: #e8c28e; font-size: 16px; line-height: 1.5; margin: 0 0 28px; }
+
+.mh-enquiry-phone { margin: -12px 0 32px; font-size: 18px; line-height: 1.6; color: #f2eee6; }
+.mh-enquiry-phone a { color: #e8c28e; font-weight: 700; text-decoration: underline; display: inline-block; }
