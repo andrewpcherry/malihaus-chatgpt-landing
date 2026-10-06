@@ -1,7 +1,3 @@
-# MaliHaus Capital
-# Production sitemap for the public website.
-
 User-agent: *
 Allow: /
-
-Sitemap: https://www.malihaus.com/sitemap.xml
+Sitemap: https://getoffer.malihaus.com/sitemap.xml
