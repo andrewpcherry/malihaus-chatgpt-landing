@@ -324,8 +324,8 @@
       + '<h2 class="mhf-h">Thank you. We have what we need.</h2>'
       + '<p class="mhf-sub">Someone from the MaliHaus team will review the property and the situation '
       + 'you described and come back to you the way you asked.</p>'
-      + '<a class="mhf-tel" data-call data-loc="funnel_done" href="#"><span data-phone></span></a>'
-      + '<div class="mhf-nav"><a class="btn ghost" href="./situations/">Situations we help with</a>'
+      + '<a class="mhf-tel" data-call data-loc="funnel_done" href="tel:+1' + esc(CFG.phoneDigits || '4079173347') + '"><span data-phone>' + esc(CFG.phoneDisplay || '407-917-3347') + '</span></a>'
+      + '<div class="mhf-nav"><a class="btn ghost" href="/privacy-policy/">Privacy Policy</a>'
       + '<a class="btn ghost" href="./">Back to MaliHaus</a></div></div>';
   }
 
@@ -466,8 +466,8 @@
         err.textContent = 'Online delivery is unavailable. Please call ' + (CFG.phoneDisplay || '') + '.';
         return;
       }
-      window.MHSellerDelivery.send(lead, S.answers).then(function(){
-        try { if (window.MHAds) window.MHAds.leadCreated(lead.submittedAt); } catch(e){}
+      window.MHSellerDelivery.send(lead, S.answers).then(function(delivery){
+        try { if (delivery && delivery.created === true && window.MHAds) window.MHAds.leadCreated(lead.submittedAt); } catch(e){}
         S.phase='done'; render();
       }).catch(function(error){
         err.textContent = error.message + ' Please call ' + (CFG.phoneDisplay || '') + ' if you need help.';

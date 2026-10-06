@@ -41,8 +41,8 @@
       banner = document.createElement('section'); banner.setAttribute('aria-label', 'Advertising measurement choice');
       banner.style.cssText = 'position:fixed;bottom:16px;left:16px;right:16px;z-index:10000;max-width:580px;padding:20px;border:1px solid #b78c59;background:#171d25;color:#fff;border-radius:12px;box-shadow:0 6px 30px #0008;font:16px/1.5 sans-serif';
       banner.innerHTML = '<p style="margin:0 0 12px">Allow advertising measurement? MaliHaus uses the OpenAI Ads Pixel to measure visits and successful enquiries. Matching may use securely hashed contact information. Your choice does not affect your enquiry. <a href="/privacy-policy/" style="color:#e8c28e">Privacy policy</a></p><button type="button" data-choice="allow">Allow measurement</button> <button type="button" data-choice="deny">Decline</button>';
-      banner.querySelector('[data-choice="allow"]').disabled = privacySignal;
       if (privacySignal) banner.innerHTML = banner.innerHTML.replace('Allow advertising measurement?', 'Your browser privacy signal disables advertising measurement.');
+      banner.querySelector('[data-choice="allow"]').disabled = privacySignal;
       banner.querySelector('[data-choice="allow"]').onclick = function () { choose(true); };
       banner.querySelector('[data-choice="deny"]').onclick = function () { choose(false); };
       document.body.appendChild(banner);

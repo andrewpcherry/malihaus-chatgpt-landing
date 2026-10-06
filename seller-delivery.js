@@ -75,7 +75,7 @@
       var previous;
       try { previous = JSON.parse(sessionStorage.getItem(key)); } catch(ignore) {}
       if (previous && Date.now() - previous.at < 86400000) {
-        if (previous.status === 'delivered') return;
+        if (previous.status === 'delivered') return {created:false};
         throw new Error('An identical enquiry is already awaiting confirmation. Please do not submit again.');
       }
       remember('pending');
@@ -134,7 +134,7 @@
         clearTimeout(timer);
         acknowledge = null;
         remember('delivered');
-        resolve();
+        resolve({created:true});
       };
       var script = document.createElement('script');
       script.src = 'https://link.msgsndr.com/js/external-tracking.js';
