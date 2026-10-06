@@ -149,3 +149,6 @@ footer{border-top:1px solid var(--line);padding:44px 0;font-size:14.5px;color:va
   .closer{padding:92px 0}
 }
 @media (prefers-reduced-motion:reduce){*{animation-duration:.001s!important;transition-duration:.001s!important}html{scroll-behavior:auto}}
+
+/* Brand ownership, visible throughout the seller enquiry. */
+.mh-brand-disclosure { color: #e8c28e; font-size: 16px; line-height: 1.5; margin: 0 0 28px; }
