@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your Website as a Receptionist</title>
+<meta name="description" content="Turning a static website into an AI receptionist that answers, chases and never clocks off.">
+<meta property="og:title" content="Your Website as a Receptionist">
+<meta property="og:description" content="A static website, or a receptionist who never clocks off. Shown running, not described.">
+<link rel="canonical" href="https://www.malihaus.com/how-it-works.html">
+<meta property="og:url" content="https://www.malihaus.com/how-it-works.html">
+<link rel="icon" href="img/cropped-Untitled-1-270x270.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Karla:wght@300;400;500;600&display=swap">
+<style>
+:root{--black:#07080A;--panel:#0E1114;--panel2:#151A1E;--line:#20272C;--line2:#2E383F;
+  --copper:#C68C4E;--copper-lt:#E8BC86;--cream:#EDF1F3;--dim:#94A0A8;--dimmer:#616E76;--live:#5FC98B;
+  --imsg:#26262B;--iblue:#0B84FF}
+*{box-sizing:border-box}
+body{margin:0;background:var(--black);color:var(--cream);
+  font-family:"Karla",Helvetica,Arial,sans-serif;font-size:17.5px;line-height:1.66;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--copper);outline-offset:3px}
+h1,h2{font-family:"Fraunces",Georgia,serif;font-weight:500;
+  font-variation-settings:"SOFT" 30,"WONK" 1;letter-spacing:-.015em;line-height:1.12}
+.wrap{max-width:1120px;margin:0 auto;padding:0 34px}
+.narrow{max-width:620px}
+
+.top{border-bottom:1px solid var(--line);padding:18px 0;background:#06070A}
+.topin{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.top img{height:34px}
+.top a{font-size:14.5px;color:var(--copper-lt);text-decoration:none}
+
+.note{padding:78px 0 8px}
+.note h1{font-size:clamp(2rem,4.4vw,3rem);margin:0 0 26px;max-width:20ch}
+.note p{color:var(--dim);margin:0 0 1.15em}
+.note p.lead{color:var(--cream);font-size:1.15rem}
+.note b{color:var(--cream);font-weight:600}
+
+.act{padding:66px 0}
+.act+.act{border-top:1px solid var(--line)}
+.g{display:grid;grid-template-columns:345px 1fr;gap:56px;align-items:center}
+.g.r{grid-template-columns:1fr 345px}
+@media(max-width:980px){.g,.g.r{grid-template-columns:1fr;gap:32px}.g.r .stage{order:-1}}
+.g.wide{grid-template-columns:1fr}
+.no{font-family:"Fraunces",serif;font-size:2.4rem;color:var(--copper);line-height:.85;
+  font-variation-settings:"SOFT" 60,"WONK" 1;margin-bottom:12px}
+.act h2{font-size:clamp(1.5rem,2.8vw,2rem);margin:0 0 14px;max-width:19ch}
+.act p{color:var(--dim);margin:0 0 .9em;max-width:44ch;font-size:16.5px}
+.act p:last-child{margin-bottom:0}
+.act p b{color:var(--cream);font-weight:600}
+.rp{margin-top:20px;background:transparent;border:1px solid var(--line2);color:var(--dim);cursor:pointer;
+  font-family:"Karla",sans-serif;font-size:14px;padding:10px 18px;transition:.2s}
+.rp:hover{border-color:var(--copper);color:var(--copper-lt)}
+
+/* iPhone */
+.iph{width:325px;margin:0 auto;background:#0A0A0C;border:1px solid #2A2E33;border-radius:46px;
+  padding:11px;box-shadow:0 50px 100px -50px #000,0 0 0 1px rgba(255,255,255,.04) inset}
+.scr{background:#000;border-radius:36px;overflow:hidden;height:610px;display:flex;flex-direction:column;position:relative}
+.island{position:absolute;top:9px;left:50%;transform:translateX(-50%);width:98px;height:27px;background:#000;border-radius:16px;z-index:5}
+.sbar{display:flex;justify-content:space-between;align-items:center;padding:15px 24px 6px;
+  font-size:13.5px;font-weight:600;color:#fff;flex-shrink:0}
+.sbar .ic{display:flex;gap:6px;align-items:center;font-size:10px}
+.bat{width:22px;height:11px;border:1px solid rgba(255,255,255,.55);border-radius:3px;position:relative;display:inline-block}
+.bat:before{content:"";position:absolute;inset:1.5px;right:6px;background:#fff;border-radius:1px}
+.ihead{display:flex;flex-direction:column;align-items:center;padding:8px 0 11px;
+  border-bottom:.5px solid #2C2C2E;background:rgba(28,28,30,.94);flex-shrink:0;position:relative}
+.ihead .av{width:46px;height:46px;border-radius:50%;background:linear-gradient(160deg,#E8BC86,#7A4F26);
+  display:grid;place-items:center;font-size:14px;color:#1a1207;font-weight:700;margin-bottom:5px}
+.ihead .nm{font-size:12.5px;color:#fff}
+.ihead .bk{position:absolute;left:16px;top:26px;color:var(--iblue);font-size:23px;line-height:1}
+.ibody{flex:1;overflow-y:auto;padding:14px 12px 8px;display:flex;flex-direction:column;gap:2px;background:#000}
+.ibody::-webkit-scrollbar{width:0}
+.mcall{background:#1C1C1E;border-radius:14px;padding:11px 13px;display:flex;align-items:center;gap:10px;
+  margin-bottom:12px;animation:pop .3s ease both}
+.mcall .ph{width:30px;height:30px;border-radius:50%;background:#3A2321;display:grid;place-items:center;
+  color:#FF6B5A;font-size:13px;flex-shrink:0}
+.mcall .t1{font-size:13px;color:#fff;font-weight:600}
+.mcall .t2{font-size:11.5px;color:#8E8E93}
+.mcall .t3{margin-left:auto;font-size:11px;color:#8E8E93}
+.ib{max-width:75%;padding:8px 13px;border-radius:18px;font-size:14.5px;line-height:1.37;
+  animation:pop .3s ease both;word-wrap:break-word}
+.ib.them{align-self:flex-start;background:var(--imsg);color:#fff;border-bottom-left-radius:5px}
+.ib.me{align-self:flex-end;background:var(--iblue);color:#fff;border-bottom-right-radius:5px}
+.ib+.ib{margin-top:2px}
+.stamp{align-self:center;font-size:10.5px;color:#8E8E93;margin:10px 0 6px}
+.deliv{align-self:flex-end;font-size:10.5px;color:#8E8E93;margin:2px 4px 6px}
+.ityp{align-self:flex-start;background:var(--imsg);border-radius:18px;border-bottom-left-radius:5px;
+  padding:12px 14px;display:flex;gap:4px;animation:pop .25s ease both}
+.ityp i{width:7px;height:7px;border-radius:50%;background:#8E8E93;animation:bl 1.2s infinite}
+.ityp i:nth-child(2){animation-delay:.18s}.ityp i:nth-child(3){animation-delay:.36s}
+.ifoot{flex-shrink:0;padding:8px 12px 12px;background:rgba(28,28,30,.94);border-top:.5px solid #2C2C2E;
+  display:flex;align-items:center;gap:9px}
+.ifoot .fld{flex:1;border:1px solid #3A3A3C;border-radius:17px;padding:7px 13px;font-size:14px;color:#8E8E93}
+.ifoot .snd{width:29px;height:29px;border-radius:50%;background:var(--iblue);display:grid;place-items:center;color:#fff;font-size:14px}
+.hbar{width:120px;height:4px;background:#48484A;border-radius:2px;margin:0 auto 7px}
+@keyframes pop{from{opacity:0;transform:translateY(10px) scale(.97)}to{opacity:1;transform:none}}
+@keyframes bl{0%,60%,100%{opacity:.3}30%{opacity:1}}
+
+/* browser + widget */
+.brw{border:1px solid var(--line2);border-radius:10px;overflow:hidden;background:#0B0906;
+  box-shadow:0 50px 110px -55px #000;max-width:940px;margin:0 auto}
+.bbar{display:flex;align-items:center;gap:9px;padding:11px 14px;background:#16181B;border-bottom:1px solid var(--line)}
+.bbar .d{width:11px;height:11px;border-radius:50%}
+.url{flex:1;margin-left:8px;background:#0C0E10;border:1px solid var(--line);border-radius:6px;
+  padding:5px 13px;font-size:12.5px;color:var(--dim);text-align:center}
+.bview{position:relative;height:500px;overflow:hidden;background:#0B0906}
+.bview .shot{width:100%;height:100%;object-fit:cover;object-position:top center;opacity:.6}
+.bview:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,8,6,.25),rgba(8,8,6,.8))}
+.launch{position:absolute;right:22px;bottom:22px;z-index:6;width:60px;height:60px;border-radius:50%;
+  background:var(--copper);border:0;cursor:pointer;display:grid;place-items:center;
+  box-shadow:0 14px 34px -10px rgba(198,140,78,.7);transition:.25s}
+.launch:hover{transform:scale(1.06)}
+.launch svg{width:27px;height:27px;fill:#160E05}
+.launch .badge{position:absolute;top:-3px;right:-3px;width:20px;height:20px;border-radius:50%;
+  background:#E5484D;color:#fff;font-size:11.5px;font-weight:700;display:grid;place-items:center;border:2px solid #0B0906}
+.ping{position:absolute;inset:0;border-radius:50%;border:2px solid var(--copper);animation:ping 2.2s cubic-bezier(0,0,.2,1) infinite}
+@keyframes ping{0%{transform:scale(1);opacity:.85}100%{transform:scale(1.75);opacity:0}}
+.wid{position:absolute;right:22px;bottom:22px;z-index:7;width:352px;max-width:calc(100% - 44px);
+  background:#101317;border:1px solid var(--line2);border-radius:14px;overflow:hidden;
+  display:flex;flex-direction:column;height:420px;box-shadow:0 34px 80px -30px rgba(0,0,0,.95);
+  opacity:0;transform:translateY(14px) scale(.97);pointer-events:none;transition:.28s cubic-bezier(.2,.8,.3,1)}
+.wid.open{opacity:1;transform:none;pointer-events:auto}
+.whead{padding:14px 16px;background:linear-gradient(135deg,#1B1409,#12161A);border-bottom:1px solid var(--line);
+  display:flex;align-items:center;gap:11px;flex-shrink:0}
+.whead .lg{width:34px;height:34px;border-radius:50%;background:linear-gradient(160deg,#E8BC86,#8A5A2C);
+  display:grid;place-items:center;font-size:12.5px;font-weight:700;color:#1a1207}
+.whead .n{font-size:14.5px;font-weight:600;line-height:1.2}
+.whead .s{font-size:11.5px;color:var(--live);display:flex;align-items:center;gap:5px}
+.whead .s:before{content:"";width:6px;height:6px;border-radius:50%;background:var(--live)}
+.whead .x{margin-left:auto;background:none;border:0;color:var(--dimmer);font-size:19px;cursor:pointer;line-height:1}
+.wbody{flex:1;overflow-y:auto;padding:16px 14px;display:flex;flex-direction:column;gap:9px}
+.wbody::-webkit-scrollbar{width:4px}.wbody::-webkit-scrollbar-thumb{background:var(--line2);border-radius:2px}
+.wb{max-width:82%;padding:10px 13px;border-radius:14px;font-size:14.5px;line-height:1.45;animation:pop .3s ease both}
+.wb.a{align-self:flex-start;background:#1A1F24;border-bottom-left-radius:4px}
+.wb.u{align-self:flex-end;background:var(--copper);color:#160E05;border-bottom-right-radius:4px;font-weight:500}
+.wtyp{align-self:flex-start;background:#1A1F24;border-radius:14px;border-bottom-left-radius:4px;padding:12px 14px;display:flex;gap:4px}
+.wtyp i{width:6px;height:6px;border-radius:50%;background:var(--copper);animation:bl 1.2s infinite}
+.wtyp i:nth-child(2){animation-delay:.18s}.wtyp i:nth-child(3){animation-delay:.36s}
+.chips{padding:0 14px 12px;display:flex;flex-wrap:wrap;gap:7px;flex-shrink:0}
+.chip{background:transparent;border:1px solid var(--copper);color:var(--copper-lt);cursor:pointer;
+  font-family:"Karla",sans-serif;font-size:13.5px;padding:8px 13px;border-radius:15px;transition:.18s;animation:pop .3s ease both}
+.chip:hover{background:var(--copper);color:#160E05}
+.wfoot{flex-shrink:0;padding:11px 14px;border-top:1px solid var(--line);display:flex;gap:9px;align-items:center}
+.wtext{flex:1;min-width:0;background:transparent;border:0;color:var(--cream);
+  font-family:"Karla",sans-serif;font-size:14.5px;padding:6px 0}
+.wtext::placeholder{color:var(--dimmer)}
+.wtext:focus{outline:none}
+.wsend{background:none;border:0;color:var(--copper);font-size:16px;cursor:pointer;padding:4px 2px;line-height:1}
+.wsend:hover{color:var(--copper-lt)}
+
+.closer{padding:96px 0;border-top:1px solid var(--line)}
+.closer h2{font-size:clamp(1.7rem,3.4vw,2.4rem);margin:0 0 22px;max-width:22ch}
+.closer p{color:var(--dim);max-width:56ch;margin:0 0 1.1em}
+.closer p b{color:var(--cream);font-weight:600}
+.sig{margin-top:34px;font-size:15px;color:var(--dimmer)}
+.sig b{display:block;color:var(--cream);font-weight:600}
+footer{border-top:1px solid var(--line);padding:32px 0;font-size:14px;color:var(--dimmer);background:#06070A}
+@media(max-width:760px){.wrap{padding:0 20px}.act{padding:48px 0}.note{padding:48px 0 8px}
+  .chip{padding:12px 16px;font-size:14.5px}.wtext{padding:10px 0;font-size:16px}.wsend{padding:8px 4px;font-size:19px}
+  .bview{height:430px}.wid{height:360px;right:14px;bottom:14px}.launch{right:16px;bottom:16px}}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.001s!important;transition-duration:.001s!important}}
+</style>
+</head>
+<body>
+
+<div class="top"><div class="wrap"><div class="topin">
+  <img src="img/logo-copper.png" alt="MaliHaus Capital">
+  <a href="./">&larr; Back to the site</a>
+</div></div></div>
+
+<div class="note"><div class="wrap narrow">
+  <h1>A static website, or an AI receptionist that never clocks off?</h1>
+  <p class="lead">George, this is separate from what we already discussed and entirely optional. Everything we talked about stands on its own.</p>
+  <p>I rang the number on your website and hung up without pressing anything, the way a seller who gave up would. <b>Nothing came back.</b> No text, no callback, nothing.</p>
+  <p>A static website sits there and waits to be filled in. The same website can instead be given <b>a receptionist who works 24 hours a day</b>: one who picks up, asks the right questions, books the appointment and chases the ones who go quiet, while you are asleep, driving, or standing in somebody's kitchen.</p>
+  <p>It comes down to one thing. A motivated seller rings two or three buyers in an evening and goes with whoever gets back to him first. Not the best offer. The first answer.</p>
+  <p>So there are three things worth showing you, and nothing else. <b>Answering instantly. Chasing so nobody drops. And waking up the ones who went quiet months ago.</b> All three are running below, so have a play with them.</p>
+</div></div>
+
+<!-- 01 -->
+<div class="act"><div class="wrap"><div class="g">
+  <div class="stage">
+    <div class="iph"><div class="scr">
+      <div class="island"></div>
+      <div class="sbar"><span>6:42</span><span class="ic">&#9679;&#9679;&#9679;&#9679; <span class="bat"></span></span></div>
+      <div class="ihead"><span class="bk">&#8249;</span><div class="av">MH</div>
+        <div class="nm">MaliHaus Capital &nbsp;&#8250;</div></div>
+      <div class="ibody" id="ib1"></div>
+      <div class="ifoot"><div class="fld">iMessage</div><div class="snd">&#8593;</div></div>
+      <div class="hbar"></div>
+    </div></div>
+  </div>
+  <div>
+    <div class="no">01</div>
+    <h2>He rang at 6:42 and you were on a walkthrough.</h2>
+    <p>This is <b>his</b> phone, not yours. Today he gets a voicemail beep and rings the next company on his list.</p>
+    <p>Watch what he gets instead.</p>
+    <button class="rp" id="rp1">Play it again</button>
+  </div>
+</div></div></div>
+
+<!-- 02 -->
+<div class="act"><div class="wrap">
+  <div class="narrow" style="margin-bottom:34px">
+    <div class="no">02</div>
+    <h2>Nine at night, on your own website.</h2>
+    <p style="max-width:52ch">Click the button in the corner and have the conversation yourself. Answer the way one of your sellers would.</p>
+  </div>
+  <div class="brw">
+    <div class="bbar"><span class="d" style="background:#FF5F57"></span><span class="d" style="background:#FEBC2E"></span>
+      <span class="d" style="background:#28C840"></span><div class="url">malihaus.com</div></div>
+    <div class="bview">
+      <img class="shot" src="img/hero-goldenhour.jpg" alt="The MaliHaus website">
+      <button class="launch" id="launch" aria-label="Open chat"><span class="ping"></span>
+        <svg viewBox="0 0 24 24"><path d="M12 3C6.5 3 2 6.8 2 11.5c0 2.4 1.2 4.6 3.1 6.1-.1 1.2-.6 2.7-1.6 3.9 0 0 2.9-.4 5-2 1.1.3 2.3.5 3.5.5 5.5 0 10-3.8 10-8.5S17.5 3 12 3z"/></svg>
+        <span class="badge">1</span></button>
+      <div class="wid" id="wid">
+        <div class="whead"><div class="lg">MH</div>
+          <div><div class="n">MaliHaus Capital</div><div class="s">Replies in seconds</div></div>
+          <button class="x" id="wclose" aria-label="Close">&times;</button></div>
+        <div class="wbody" id="wbody"></div>
+        <div class="chips" id="chips"></div>
+        <div class="wfoot">
+          <input id="winput" class="wtext" type="text" placeholder="Type anything…" aria-label="Type a message" autocomplete="off">
+          <button id="wsend" class="wsend" aria-label="Send">&#10148;</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+
+<!-- 03 -->
+<div class="act"><div class="wrap"><div class="g r">
+  <div>
+    <div class="no">03</div>
+    <h2>And the ones from March that went quiet.</h2>
+    <p>You have a list of people who called once, were not ready, and were never rung again. Not because you did not want to. Because there is always a house in front of you.</p>
+    <p>This one first called <b>five months ago</b>. Nobody touched him since.</p>
+    <button class="rp" id="rp3">Play it again</button>
+  </div>
+  <div class="stage">
+    <div class="iph"><div class="scr">
+      <div class="island"></div>
+      <div class="sbar"><span>10:15</span><span class="ic">&#9679;&#9679;&#9679;&#9679; <span class="bat"></span></span></div>
+      <div class="ihead"><span class="bk">&#8249;</span><div class="av">MH</div>
+        <div class="nm">MaliHaus Capital &nbsp;&#8250;</div></div>
+      <div class="ibody" id="ib3"></div>
+      <div class="ifoot"><div class="fld">iMessage</div><div class="snd">&#8593;</div></div>
+      <div class="hbar"></div>
+    </div></div>
+  </div>
+</div></div></div>
+
+<div class="closer"><div class="wrap narrow">
+  <h2>That is the whole idea. A receptionist, not a brochure.</h2>
+  <p>Answer first, keep answering, and stop losing the ones who went cold. There is a great deal more that could be bolted on and I have deliberately left it out, because none of it matters next to being the one who got back to him.</p>
+  <p>The other thing worth a conversation is <a href="https://andrewpcherry.github.io/malihaus-funnel/" style="color:var(--copper-lt)">your qualification funnel</a>, which I have already set up in your name. It would sit behind the address box on the home page, so a seller who starts there is asked the right questions before anyone picks up the phone.</p>
+  <p><b>All of this sits alongside what we already discussed, it does not replace any of it.</b> If none of it is of interest, that is genuinely fine and we carry on as planned. If it is, we can talk it through on a call and I will put some numbers together.</p>
+  <div class="sig"><b>Andrew Cherry</b>RequityAI &nbsp;&middot;&nbsp; andrew@requityai.com</div>
+</div></div>
+
+<footer><div class="wrap">Prepared for MaliHaus Capital</div></footer>
+
+<script>
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+function maker(el){return h=>{const d=document.createElement('div');d.innerHTML=h;
+  const e=d.firstElementChild;el.appendChild(e);el.scrollTop=el.scrollHeight;return e;};}
+
+/* 01 missed call */
+const ib1=document.getElementById('ib1');let r1=0;
+async function phone1(){
+  const me=++r1;ib1.innerHTML='';const add=maker(ib1);
+  await wait(350);if(me!==r1)return;
+  add('<div class="stamp">Today 6:42 PM</div>');
+  add('<div class="mcall"><span class="ph">&#9742;</span><div><div class="t1">Missed call</div>'+
+      '<div class="t2">MaliHaus Capital</div></div><span class="t3">6:42 PM</span></div>');
+  await wait(900);if(me!==r1)return;
+  let t=add('<div class="ityp"><i></i><i></i><i></i></div>');
+  await wait(1200);if(me!==r1)return;t.remove();
+  add('<div class="ib them">Sorry we missed you, this is MaliHaus. Are you calling about selling a property?</div>');
+  await wait(600);if(me!==r1)return;
+  add('<div class="ib them">If you give me the address I can start looking at it now.</div>');
+  await wait(2300);if(me!==r1)return;
+  add('<div class="ib me">yeah my mums place in delray. she passed and im in georgia</div>');
+  await wait(900);if(me!==r1)return;
+  t=add('<div class="ityp"><i></i><i></i><i></i></div>');
+  await wait(1400);if(me!==r1)return;t.remove();
+  add('<div class="ib them">I\'m sorry about your mother. Being out of state makes this easier than most people expect. What\'s the address?</div>');
+  await wait(2200);if(me!==r1)return;
+  add('<div class="ib me">1140 SW 8th Ave. empty since march</div>');
+  await wait(900);if(me!==r1)return;
+  t=add('<div class="ityp"><i></i><i></i><i></i></div>');
+  await wait(1300);if(me!==r1)return;t.remove();
+  add('<div class="ib them">Thank you. George can call you tomorrow with a number. Would 10am suit?</div>');
+  await wait(1900);if(me!==r1)return;
+  add('<div class="ib me">yes thats fine</div>');
+  add('<div class="deliv">Delivered</div>');
+}
+document.getElementById('rp1').addEventListener('click',phone1);
+new IntersectionObserver((e,o)=>e.forEach(x=>{if(x.isIntersecting){o.disconnect();phone1();}}),
+  {threshold:.3}).observe(ib1);
+
+/* 03 reactivation */
+const ib3=document.getElementById('ib3');let r3=0;
+async function phone3(){
+  const me=++r3;ib3.innerHTML='';const add=maker(ib3);
+  await wait(350);if(me!==r3)return;
+  add('<div class="stamp">March 14</div>');
+  add('<div class="ib them">Thanks for calling today. Whenever you are ready, we are here.</div>');
+  await wait(1400);if(me!==r3)return;
+  add('<div class="stamp">Today 10:15 AM</div>');
+  let t=add('<div class="ityp"><i></i><i></i><i></i></div>');
+  await wait(1300);if(me!==r3)return;t.remove();
+  add('<div class="ib them">Morning Dale, it\'s MaliHaus. We spoke back in March about the house on Hibiscus. Did you end up selling it?</div>');
+  await wait(2600);if(me!==r3)return;
+  add('<div class="ib me">no still sat there. tenant moved out in june</div>');
+  await wait(1000);if(me!==r3)return;
+  t=add('<div class="ityp"><i></i><i></i><i></i></div>');
+  await wait(1400);if(me!==r3)return;t.remove();
+  add('<div class="ib them">Empty since June changes things, it usually means a better number now than in March. Worth ten minutes?</div>');
+  await wait(2200);if(me!==r3)return;
+  add('<div class="ib me">go on then. after 2 today</div>');
+  await wait(900);if(me!==r3)return;
+  t=add('<div class="ityp"><i></i><i></i><i></i></div>');
+  await wait(1100);if(me!==r3)return;t.remove();
+  add('<div class="ib them">Booked for 2:30. George will have the recent sales on Hibiscus in front of him.</div>');
+  add('<div class="deliv">Delivered</div>');
+}
+document.getElementById('rp3').addEventListener('click',phone3);
+new IntersectionObserver((e,o)=>e.forEach(x=>{if(x.isIntersecting){o.disconnect();phone3();}}),
+  {threshold:.3}).observe(ib3);
+
+</script>
+<script src="chat.js?v=2087594980"></script>
+
+</body>
+</html>

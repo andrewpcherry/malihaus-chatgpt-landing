@@ -1,0 +1,7 @@
+# MaliHaus Capital
+# Production sitemap for the public website.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://www.malihaus.com/sitemap.xml
