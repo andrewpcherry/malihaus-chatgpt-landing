@@ -29,9 +29,9 @@
    * ------------------------------------------------------------------ */
 
   var BRANCHES = {
-    comparing:{icon:'sign',label:'Property enquiry',tag:'Property',card:'I am considering selling a property',blurb:'Share the property details and your preferred selling timeframe.',exclusive:true,headline:'Tell us how to contact you about the property.',intro:'The MaliHaus team can review your enquiry. Any offer depends on property review and a separate written agreement.',extra:null,qs:[]},
-    condition:{icon:'tools',label:'Property condition',tag:'Condition',card:'The property needs repairs',blurb:'Tell us about its current condition.',headline:'Tell us how to contact you about the property.',intro:'The MaliHaus team can review the condition you describe. No price or closing date is guaranteed.',extra:null,qs:[{id:'issue',q:'How would you describe the property condition?',opts:['Needs minor repairs','Needs major repairs','Renovation in progress','I am not sure']}]},
-    rental:{icon:'keys',label:'Rental property',tag:'Property',card:'I am considering selling a rental property',blurb:'Share the property and occupancy details.',headline:'Tell us how to contact you about the property.',intro:'The MaliHaus team can review your property enquiry. Any sale requires a separate written agreement.',extra:null,qs:[]}
+    comparing:{icon:'sign',label:'Property enquiry',tag:'Property',card:'I am considering selling a property',blurb:'Share the property details and your preferred selling timeframe.',exclusive:true,headline:'Tell us how to contact you about the property.',intro:'The Mali Haus team can review your enquiry. Any offer depends on property review and a separate written agreement.',extra:null,qs:[]},
+    condition:{icon:'tools',label:'Property condition',tag:'Condition',card:'The property needs repairs',blurb:'Tell us about its current condition.',headline:'Tell us how to contact you about the property.',intro:'The Mali Haus team can review the condition you describe. No price or closing date is guaranteed.',extra:null,qs:[{id:'issue',q:'How would you describe the property condition?',opts:['Needs minor repairs','Needs major repairs','Renovation in progress','I am not sure']}]},
+    rental:{icon:'keys',label:'Rental property',tag:'Property',card:'I am considering selling a rental property',blurb:'Share the property and occupancy details.',headline:'Tell us how to contact you about the property.',intro:'The Mali Haus team can review your property enquiry. Any sale requires a separate written agreement.',extra:null,qs:[]}
   };
   var COMBOS = {};
   var COMMON = [
@@ -283,18 +283,18 @@
     }
     return '<form id="malihaus-seller-enquiry" class="mhf-step" onsubmit="event.preventDefault()"><p class="kicker">Last step</p>'
       + '<h2 class="mhf-h">How should we contact you?</h2>'
-      + '<p class="mhf-sub">Share your contact details so the team can respond to your property enquiry. Submitting does not commit you to selling.</p>'
+      + '<p class="mhf-sub">Share your contact details to discuss a potential purchase. Submitting does not oblige you to sell or guarantee an offer. Any price, costs, terms and closing timing depend on property review and a written agreement.</p>'
       + '<div class="mhf-form">'
-      + f('First name','firstName','text','given-name')
-      + f('Last name','lastName','text','family-name')
-      + f('Phone','phone','tel','tel')
-      + f('Email','email','email','email')
-      + '<div class="mhf-f mhf-full">' + f('Street Address','address','text','street-address').replace(/^<div class="mhf-f">|<\/div>$/g,'') + '</div>'
-      + f('City','city','text','address-level2')
-      + f('ZIP code','zip','text','postal-code','inputmode="numeric" maxlength="10" oninput="MHF.zip(this.value)"')
+      + f('First name (required)','firstName','text','given-name','required aria-describedby="mhf-err"')
+      + f('Last name (required)','lastName','text','family-name','required aria-describedby="mhf-err"')
+      + f('Phone (phone or email required)','phone','tel','tel','aria-describedby="mhf-err"')
+      + f('Email (phone or email required)','email','email','email','aria-describedby="mhf-err"')
+      + '<div class="mhf-f mhf-full">' + f('Property street address (required)','address','text','street-address','required aria-describedby="mhf-err"').replace(/^<div class="mhf-f">|<\/div>$/g,'') + '</div>'
+      + f('Property city (required)','city','text','address-level2','required aria-describedby="mhf-err"')
+      + f('Property ZIP code (required)','zip','text','postal-code','required aria-describedby="mhf-err" inputmode="numeric" maxlength="10" oninput="MHF.zip(this.value)"')
       + '<div class="mhf-f mhf-full mhf-ziphint" id="mhf-zipstate"></div>'
       + pick('Best time to call','bestTime',['Any time','Morning','Afternoon','Evening'],'Any time')
-      + pick('Call or text first','contactPref',['A call is fine','Text me first','Email me','Either is fine'],'A call is fine')
+      + pick('Preferred contact method','contactPref',['A call is fine','Text me first','Email me','Either is fine'],'A call is fine')
       + '<div class="mhf-f mhf-full"><label for="mhfNotes">'
       + esc((BRANCHES[S.primary].extra && BRANCHES[S.primary].extra.label)
             || 'Anything else we should know? (optional)')
@@ -305,7 +305,7 @@
       + '<label class="mhf-consent"><input type="checkbox" id="marketingConsent"><span>Optional marketing permission. <span class="mhf-disc">' + esc(CFG.marketingConsentDisclosure || '') + '</span></span></label>'
       + '<div id="mhf-err" class="mhf-err" role="alert"></div>'
       + '<div class="mhf-nav"><button type="button" id="mhf-send" class="btn solid" onclick="MHF.submit()">Send My Property Enquiry</button>'
-      + '<span class="mhf-hint">No obligation. Not a listing agreement.</span></div>'
+      + '<span class="mhf-hint">Submitting this enquiry does not create a purchase contract.</span></div>'
       + backBar('') + '</form>';
   }
 
@@ -321,12 +321,12 @@
 
   function doneHtml(){
     return '<div class="mhf-step mhf-done"><div class="mhf-tickbig">&#10003;</div>'
-      + '<h2 class="mhf-h">Thank you. We have what we need.</h2>'
-      + '<p class="mhf-sub">Someone from the MaliHaus team will review the property and the situation '
-      + 'you described and come back to you the way you asked.</p>'
+      + '<h2 class="mhf-h">Thank you. Your enquiry was received.</h2>'
+      + '<p class="mhf-sub">Someone from the Mali Haus team will review the property and the situation '
+      + 'you described. You requested a response using your preferred contact method. This confirmation is not an offer or purchase agreement.</p>'
       + '<a class="mhf-tel" data-call data-loc="funnel_done" href="tel:+1' + esc(CFG.phoneDigits || '4079173347') + '"><span data-phone>' + esc(CFG.phoneDisplay || '407-917-3347') + '</span></a>'
       + '<div class="mhf-nav"><a class="btn ghost" href="/privacy-policy/">Privacy Policy</a>'
-      + '<a class="btn ghost" href="./">Back to MaliHaus</a></div></div>';
+      + '<a class="btn ghost" href="./">Back to Mali Haus</a></div></div>';
   }
 
   function render(){
@@ -431,7 +431,11 @@
       if (!/^\d{5}(-\d{4})?$/.test(zip)) need.push('a valid ZIP code');
       if (!consent || !consent.checked) need.push('the tick box so we are allowed to contact you');
       if (marketing && marketing.checked && !phone) need.push('a phone number for optional marketing permission');
-      if (need.length) { err.textContent = 'We still need ' + need.join(', ') + '.'; return; }
+      if (need.length) {
+        err.textContent = 'We still need ' + need.join(', ') + '.';
+        err.setAttribute('tabindex', '-1'); err.focus();
+        return;
+      }
       err.textContent = '';
 
       var t = tier(), now = new Date().toISOString();
