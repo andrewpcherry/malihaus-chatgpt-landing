@@ -66,7 +66,7 @@
        automatically for the public number. */
     consentCheckboxLabel: 'I agree to the Terms & Conditions and Privacy Policy.',
     consentDisclosure: 'I request a response about my property enquiry using the contact details I provide. Marketing permission is optional.',
-    marketingConsentDisclosure: 'I agree to receive marketing calls and text messages, including calls using automated technology or an artificial or prerecorded voice, at the phone number I provide, from MaliHaus, a brand of Real Estate RE Marketing Inc. Consent is not a condition of purchasing any property, goods or services. Message frequency varies. Message and data rates may apply. Reply STOP to unsubscribe or HELP for help at (321) 655-2099. We will not share or sell mobile data to third parties for promotional or marketing purposes.',
+    marketingConsentDisclosure: 'I agree to receive marketing calls and text messages, including calls using automated technology or an artificial or prerecorded voice, at the phone number I provide, from Mali Haus, a brand of Real Estate RE Marketing Inc. Consent is not a condition of purchasing any property, goods or services. Message frequency varies. Message and data rates may apply. Reply STOP to unsubscribe or HELP for help at (321) 655-2099. We will not share or sell mobile data to third parties for promotional or marketing purposes.',
 
 
     /* ---- Review proof ----
